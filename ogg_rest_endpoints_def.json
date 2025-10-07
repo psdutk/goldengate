@@ -1,0 +1,114 @@
+{
+    "list_extracts": {
+      "url_suffix": "extracts",
+      "op": "get"
+    },
+    "extract_retrieve_status": {
+      "url_suffix": "extracts/$url_arg/info/status",
+      "op": "get"
+    },
+    "update_extract": {
+      "url_suffix": "extracts/$url_arg",
+      "op": "patch"
+    },
+    "extract_issue_command": {
+      "url_suffix": "extracts/$url_arg/command",
+      "op": "post"
+    },
+    "retrieve_extract": {
+      "url_suffix": "extracts/$url_arg",
+      "op": "get"
+    },
+    "delete_extract": {
+      "url_suffix": "extracts/$url_arg",
+      "op": "delete"
+    },
+    "list_replicats": {
+      "url_suffix": "replicats",
+      "op": "get"
+    },
+    "replicat_retrieve_status": {
+      "url_suffix": "replicats/$url_arg/info/status",
+      "op": "get"
+    },
+    "update_replicat": {
+      "url_suffix": "replicats/$url_arg",
+      "op": "patch"
+    },
+    "replicat_issue_command": {
+      "url_suffix": "replicats/$url_arg/command",
+      "op": "post"
+    },
+    "retrieve_replicat": {
+      "url_suffix": "replicats/$url_arg",
+      "op": "get"
+    },
+    "delete_replicat": {
+      "url_suffix": "replicats/$url_arg",
+      "op": "delete"
+    },
+    "list_config_files": {
+      "url_suffix": "config/files",
+      "op": "get"
+    },
+    "create_configuration_file": {
+      "url_suffix": "config/files/$url_arg",
+      "op": "post"
+    },
+    "delete_configuration_file": {
+      "url_suffix": "config/files/$url_arg",
+      "op": "delete"
+    },
+    "replace_configuration_file": {
+      "url_suffix": "config/files/$url_arg",
+      "op": "put"
+    },
+    "retrieve_configuration_file": {
+      "url_suffix": "config/files/$url_arg",
+      "op": "get"
+    },
+    "list_configuration_data_types": {
+      "url_suffix": "config/types",
+      "op": "get"
+    },
+    "list_configuration_values": {
+      "url_suffix": "config/types/$url_arg/values",
+      "op": "get"
+    },
+    "execute_command": {
+      "url_suffix": "commands/execute",
+      "op": "post"
+    },
+    "events": {
+      "url_suffix": "logs/events",
+      "op": "get"
+    },
+    "logs": {
+      "url_suffix": "logs",
+      "op": "get"
+    },
+    "logs_restapi": {
+      "url_suffix": "logs/restapi",
+      "op": "get"
+    },
+    "messages": {
+      "url_suffix": "messages",
+      "op": "get"
+    },
+    "service_manager_certificates_info": {
+      "url_suffix": "deployments/ServiceManager/certificates/server/default/info",
+      "op": "get"
+    },
+    "list_certtypes": {
+      "url_suffix": "certificates",
+      "op": "get"
+    },
+    "list_certnames": {
+      "url_suffix": "certificates/$url_arg",
+      "op": "get"
+    },
+    "get_cert": {
+      "url_suffix": "certificates/$url_arg",
+      "op": "get"
+    }
+}

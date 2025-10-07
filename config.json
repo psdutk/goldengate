@@ -1,0 +1,57 @@
+{
+    "default_max_number_lines_per_default_tables_prm": 100000,
+    "default_verify_cert": "verify.crt",
+    "default_templates": {
+        "extract": {
+            "process": "j2/extract.j2",
+            "process_tables": "j2/ext_table.j2"
+        },
+        "replicat": {
+            "process": "j2/replicat.j2",
+            "process_tables": "j2/rep_table.j2"
+        }
+    },
+    "gg_endpoints": {
+        "myserver": {
+            "url": "https://myserver:9200",
+            "user": "ggadmin"
+        }
+    },
+    "prod": {
+        "gg_endpoint": "myserver",
+        "source_db": {
+            "dsn": "SRC_DB",
+            "user": "GGADMIN"
+        },
+        "target_db": {
+            "dsn": "TGT_DB",
+            "user": "GGADMIN",
+            "owner": "LDZ"
+        },
+        "tables_file": "csv/tables.csv",
+        "lobs_file": "csv/lobs.csv",
+        "trail": "es",
+        "processes": {
+            "extract": {
+                "process_name": "EXT",
+                "credential_name": "GGADMIN_SRC",
+                "prm_file_name": "EXT.prm",
+                "prm_table_file_name": [
+                    "EXT_TABLES_1.prm",
+                    "EXT_TABLES_2.prm"
+                ],
+                "max_number_lines_per_default_tables_prm": 1000
+            },
+            "replicat": {
+                "process_name": "REP",
+                "credential_name": "GGADMIN_TGT",
+                "prm_file_name": "REP.prm",
+                "prm_table_file_name": [
+                    "REP_TABLES_1.prm",
+                    "REP_TABLES_2.prm"
+                ],
+                "max_number_lines_per_default_tables_prm": 1000
+            }
+        }
+    }
+}
