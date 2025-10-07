@@ -1,0 +1,2 @@
+# goldengate
+Scripts for GoldenGate
