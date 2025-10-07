@@ -1,0 +1,40 @@
+REPLICAT {{ process_name }}
+USERIDALIAS {{ credential_name }} DOMAIN OracleGoldenGate
+-- Number of mappers to control the number of threads used to read the trail file
+MAP_PARALLELISM 2
+-- Min number of connections in the target DB
+MIN_APPLY_PARALLELISM 2
+-- Max number of connections in the target DB
+MAX_APPLY_PARALLELISM 2
+-- how large transactions have to be broken in pieces
+BATCHSQL BATCHESPERQUEUE 1000, BATCHTRANSOPS 100000, OPSPERBATCH 100000, OPSPERQUEUE 100000
+-- how large transactions have to be broken in pieces
+SPLIT_TRANS_RECS 10000
+EOFDELAYCSECS 1
+--
+REPORTCOUNT EVERY 60 MINUTES, RATE
+REPORT AT 23:55
+REPORTROLLOVER AT 00:00 ON SUNDAY
+--
+INSERTALLRECORDS
+--
+REPERROR (-1, DISCARD)
+--
+MACRO #replicat_table
+PARAMS (#source_owner, #table_name, #target_owner)
+BEGIN
+MAP #source_owner.#table_name, TARGET #target_owner.#table_name,
+COLMAP(USEDEFAULTS,
+LZORA_TRANS_ID = @TOKEN('FND_TRANSACTION_ID'),
+LZORA_COMMIT_TS = @TOKEN('FND_COMMIT_TS'),
+LZORA_COMMIT_SCN = @TOKEN('FND_TRANSACTION_SCN'),
+LZORA_DML_OPERATION = @TOKEN('FND_OP_TYPE'),
+LZORA_BEFOREAFTER = @GETENV('GGHEADER', 'BEFOREAFTERINDICATOR'),
+LZORA_ORDERINTRX = @COMPUTE(@COMPUTE(@NUMSTR(@GETENV ('RECORD', 'FILESEQNO'))*100000000000)+@NUMSTR(@GETENV ('RECORD', 'FILERBA')))
+),
+KEYCOLS(LZORA_ORDERINTRX);
+END;
+--
+{% for file in prm_table_file_name %}
+INCLUDE {{ file }}
+{% endfor %}

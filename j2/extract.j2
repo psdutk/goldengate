@@ -1,0 +1,40 @@
+EXTRACT {{ process_name }}
+USERIDALIAS {{ credential_name }} DOMAIN OracleGoldenGate
+--
+ENCRYPTTRAIL AES256
+EXTTRAIL {{ trail }}
+--
+UPDATERECORDFORMAT FULL
+NOCOMPRESSDELETES FETCHMISSINGCOLUMNS
+FETCHOPTIONS USESNAPSHOT, USELATESTVERSION
+--
+STATOPTIONS REPORTFETCH
+--
+REPORTCOUNT EVERY 60 MINUTES, RATE
+REPORT AT 23:55
+REPORTROLLOVER AT 00:00 ON SUNDAY
+--
+WARNLONGTRANS 8H ,CHECKINTERVAL 1H
+--
+MACRO #extract_table
+PARAMS (#source_owner, #table_name)
+BEGIN
+TABLE #source_owner.#table_name, FETCHCOLS(*)
+TOKENS
+(
+ FND_OP_TYPE = @CASE(                                &
+                 @GETENV('GGHEADER', 'OPTYPE'),      &
+                 'SQL COMPUPDATE', 'U',              &
+                 'PK UPDATE', 'U',                   &
+                 'ENSCRIBE COMPUPDATE', 'U',         &
+                 'INSERT', 'I',                      &
+                 'DELETE', 'D'),
+ FND_TRANSACTION_ID = @GETENV('TRANSACTION', 'TRANSACTIONID'),
+ FND_COMMIT_TS = @GETENV('GGHEADER', 'COMMITTIMESTAMP')
+ FND_TRANSACTION_SCN = @GETENV ('TRANSACTION','CSN')
+);
+END;
+--
+{% for file in prm_table_file_name %}
+INCLUDE {{ file }}
+{% endfor %}
