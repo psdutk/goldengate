@@ -8,8 +8,8 @@ from pprint import pprint as pp
 
 import argparse
 
-from common import common
-from lazydb import lazydb
+import common
+import lazydb
 from tables import tables
 from lobs import lobs
 

@@ -9,7 +9,7 @@ import argparse
 import string
 import time
 
-import common.common as common
+import common
 import gen_prms
 import gg
 

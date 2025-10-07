@@ -7,12 +7,13 @@ Script to generate sql for the LandingZone
 import argparse
 import sys
 
+import lazydb
 
 from common import common
-from lazydb import lazydb
 from tables import tables
 from lobs import lobs
 from constants import VALID_ENVS
+
 
 """
 Constants

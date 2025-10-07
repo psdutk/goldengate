@@ -16,7 +16,7 @@ import string
 import sys
 import urllib.parse
 
-from common import common
+import common
 from constants import VALID_ENVS
 
 """

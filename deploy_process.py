@@ -6,7 +6,7 @@ Script to automate the deplyoment of gg processes
 
 from string import Template
 
-from common.common import read_json
+from common
 
 import argparse
 import time
